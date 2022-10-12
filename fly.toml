@@ -1,4 +1,4 @@
-app = "remix-oxford-dictionary-e709"
+app = "remix-oxford-dictionary"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
