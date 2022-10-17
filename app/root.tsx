@@ -11,14 +11,21 @@ import {
 
 import { getUser } from "./session.server";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
+import remixImageStyles from "remix-image/remix-image.css";
+import globalStyles from "./styles/global.css";
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+  return [
+    { rel: "stylesheet", href: globalStyles },
+    { rel: "stylesheet", href: "https://fonts.googleapis.com/icon?family=Material+Icons" },
+    { rel: "stylesheet", href: remixImageStyles },
+    { rel: "stylesheet", href: tailwindStylesheetUrl}
+  ];
 };
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "Remix Oxford Dictionary",
   viewport: "width=device-width,initial-scale=1",
 });
 

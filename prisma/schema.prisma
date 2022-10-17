@@ -36,3 +36,12 @@ model Note {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
 }
+
+model Dictionary {
+  id    String @id @default(cuid())
+  word String
+  description  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
