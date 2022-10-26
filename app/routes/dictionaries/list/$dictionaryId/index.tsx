@@ -1,19 +1,38 @@
-import { json, type LoaderArgs } from "@remix-run/node"
-import { useLoaderData, useCatch } from "@remix-run/react";
+import * as React from 'react';
+import { json } from "@remix-run/node"
+import { useLoaderData, useCatch, useFetcher } from "@remix-run/react";
+import { getJokes } from '~/routes/api/jokes';
 
-export async function loader({params}: LoaderArgs) {
-  throw new Response("What a joke! Not found.", {
-    status: 403
-  });
-  const response = await fetch("https://official-joke-api.appspot.com/random_joke");
-  const jokes = await response.json();
+export async function loader() {
+  // throw new Response("What a joke! Not found.", {
+  //   status: 403
+  // });
+  // return json({
+  //   jokes: {
+  //     setup: "test",
+  //     punchline: "test"
+  //   },
+  // });
+  const jokes = await getJokes()
   return json({
     jokes,
+  }, {
+    headers: {
+      'Cache-Control': 'max-age=10',
+    },
   });
 };
 
 export default function JokesDetailPage () {
   const { jokes } = useLoaderData<typeof loader>();
+
+  // const jokesFetcher = useFetcher();
+  // const jokes = (jokesFetcher?.data as any)?.jokes ?? [];
+
+  // React.useEffect(() => {
+  //   jokesFetcher.load("/api/jokes");
+  // }, [])
+
   return (
     <div className="p-5">
       <h1 className="text-xl font-bold text-center text-blue-600">Joke Of The Day</h1>

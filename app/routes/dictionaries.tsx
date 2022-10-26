@@ -1,4 +1,4 @@
-import { Outlet } from "@remix-run/react";
+import { Link, Outlet } from "@remix-run/react";
 import Image from "remix-image";
 
 const OXFORD_DICTIONARY_LOGO = "https://www.seekpng.com/png/full/55-555980_view-definition-in-oxford-dictionaries-english-oxford-living.png"
@@ -22,7 +22,9 @@ export default function DictionariesPage () {
             />
           </div>
           <div className="self-center">
-            <span className="material-icons blueSky">add_circle</span>
+            <Link to="list/admin/new" className="text-blue-500 underline">
+              <span className="material-icons blueSky">add_circle</span>
+            </Link>
           </div>
         </div>
       </div>
