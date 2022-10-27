@@ -17,7 +17,6 @@ export async function loader({ params }: LoaderArgs) {
   return json({ dictionary });
 }
 
-
 export async function action({ request, params }: ActionArgs) {
   const formData = await request.formData();
   const intent = formData.get("intent");
@@ -62,9 +61,6 @@ export default function NewDictionaryPage() {
   const data = useLoaderData<typeof loader>();
   const {slug} = useParams();
 
-  // only working with Form
-  // const actionData = useActionData<typeof action>(); 
-
   const wordRef = React.useRef<HTMLInputElement>(null);
   const descriptionRef = React.useRef<HTMLTextAreaElement>(null);
   const formRef = React.useRef<any>(null);
@@ -79,10 +75,12 @@ export default function NewDictionaryPage() {
   console.log("WORD", word, description)
 
   // const transition = useTransition();
+  // only working with Form
+  // const actionData = useActionData<typeof action>(); 
   // const isCreating = transition.submission?.formData.get("intent") === "create";
   // const isUpdating = transition.submission?.formData.get("intent") === "update";
   // const isDeleting = transition.submission?.formData.get("intent") === "delete";
-  // const word = transition.submission?.formData.get("word");
+  // const word = transition.submission?.formData.get("word") as string;
   // const description = transition.submission?.formData.get("description") as string;
   // console.log("WORD", word, description)
 
@@ -97,11 +95,10 @@ export default function NewDictionaryPage() {
     } else if (actionData?.errors?.description) {
       formEl.elements.description?.focus();
     } else if (document.activeElement === formEl.elements.intent) {
-      alert("Test")
       formEl.reset();
       formEl.elements.word?.focus();
     }
-  }, [dictionaryFetcher.state, actionData?.errors?.word]);
+  }, [dictionaryFetcher?.state, actionData?.errors?.word]);
 
   const isNewDictionary = !data.dictionary;
 
